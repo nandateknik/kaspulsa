@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
+use App\Models\Bank;
+use App\Models\Kas;
 use App\Models\Pelanggan;
 use App\Models\Produk;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Log;
 
 class TransaksiController extends Controller
@@ -32,8 +35,10 @@ class TransaksiController extends Controller
         $action = '/transaksi';
         $action_method = 'POST';
         $pelanggan = Pelanggan::all();
+        $bank = Bank::all();
         $produk = Produk::all();
-        return view('transaksi/input',compact('action','action_method','pelanggan','produk'));
+        $kas = Kas::where('tanggal',date('Y-m-d'))->first();
+        return view('transaksi/input',compact('action','action_method','pelanggan','produk','bank','kas'));
     }
 
     /**
@@ -51,7 +56,9 @@ class TransaksiController extends Controller
             $transaksi->produk_id = $request->produk_id;
             $transaksi->jenis_payment = $request->jenis_payment;
             $transaksi->saldo_akhir = $request->saldo_akhir;
+            $transaksi->saldo_deposit = $request->saldo_deposit;
             $transaksi->waktu = $request->waktu;
+            $transaksi->bank_id = $request->bank_id;
             $transaksi->save();
             DB::commit();
             // all good
@@ -87,9 +94,11 @@ class TransaksiController extends Controller
         if($transaksi){
             $pelanggan = Pelanggan::all();
             $produk = Produk::all();
+            $bank = Bank::all();
+            $kas = Kas::where('tanggal',date('Y-m-d'))->first();
             $action = '/transaksi/'.$transaksi->id_transaksi;
             $action_method = 'PUT';
-            return view('transaksi/input',compact('transaksi','action','action_method','pelanggan','produk'));
+            return view('transaksi/input',compact('transaksi','action','action_method','pelanggan','produk','bank','kas'));
         }else{
             return redirect()->back()->withErrors(['Transaksi tidak ditemukan.']);
         }
@@ -112,7 +121,9 @@ class TransaksiController extends Controller
                 $transaksi->produk_id = $request->produk_id;
                 $transaksi->jenis_payment = $request->jenis_payment;
                 $transaksi->saldo_akhir = $request->saldo_akhir;
+                $transaksi->saldo_deposit = $request->saldo_deposit;
                 $transaksi->waktu = $request->waktu;
+                $transaksi->bank_id = $request->bank_id;
                 $transaksi->save();
 
                 DB::commit();
@@ -155,5 +166,25 @@ class TransaksiController extends Controller
         }else{
             return redirect()->back()->withInput()->withErrors(['Terjadi kesalahan saat simpan, silahkan coba kembali.']);
         }
+    }
+
+    public function setKasAwal(Request $request){
+        $validator = Validator::make($request->all(), [
+            'kas_awal' => 'required|numeric'
+        ]);
+        if ($validator->fails()) {
+            $data['status'] = 'failed';
+            $data['message'] = $validator->errors()->first();
+            return response()->json([$data],400);
+        }
+
+        $kas = new Kas;
+        $kas->kas_awal = $request->kas_awal;
+        $kas->tanggal = date('Y-m-d');
+        $kas->save();
+
+        $data['status'] = 'success';
+        $data['message'] = 'success';
+        return response()->json([$data],201);
     }
 }

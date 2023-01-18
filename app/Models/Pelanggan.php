@@ -13,7 +13,4 @@ class Pelanggan extends Model
     protected $primaryKey = 'id_pelanggan';
     protected $fillable = ['nama_pelanggan','no_telp','status'];
 
-    public function banks(){
-        return $this->hasMany(Bank::class,'pelanggan_id','id_pelanggan');
-    }
 }

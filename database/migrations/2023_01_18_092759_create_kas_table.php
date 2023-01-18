@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBankTable extends Migration
+class CreateKasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateBankTable extends Migration
      */
     public function up()
     {
-        Schema::create('bank', function (Blueprint $table) {
-            $table->id('id_bank');
-            $table->string('nama_bank',50);
-            $table->string('no_rekening',50);
-            $table->string('nama_rekening',50);
-            $table->double('saldo_akhir')->nullable();
+        Schema::create('kas', function (Blueprint $table) {
+            $table->id('id_kas');
+            $table->date('tanggal');
+            $table->double('kas_awal')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateBankTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank');
+        Schema::dropIfExists('kas');
     }
 }

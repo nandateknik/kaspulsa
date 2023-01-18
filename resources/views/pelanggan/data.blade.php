@@ -42,8 +42,6 @@
                                   <thead>
                                     <tr>
                                       <th>Nama</th>
-                                      <th>No Rekening</th>
-                                      <th>Bank</th>
                                       <th>No Telphone</th>
                                       <th>Status</th>
                                       <th>Action</th>
@@ -55,8 +53,6 @@
                                     @foreach($pelanggan as $key => $row)
                                     <tr>
                                       <td class="text-bold-500">{{$row->nama_pelanggan}}</td>
-                                      <td>{{$row->banks[0]->no_rekening}}</td>
-                                      <td>{{$row->banks[0]->nama_bank}}</td>
                                       <td>{{$row->no_telp}}</td>
                                       <td>{!! $row->status == 1 ? '<span class="badge bg-info">Aktif</span>' : '<span class="badge bg-secondary">Nonaktif</span>' !!}</td>
                                       <td>

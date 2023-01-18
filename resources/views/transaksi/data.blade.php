@@ -43,7 +43,7 @@
                                       <th>Pelanggan</th>
                                       <th>Produk</th>
                                       <th>Jenis Payment</th>
-                                      <th>Saldo Akhir</th>
+                                      <th class="text-end">Saldo Deposit</th>
                                       <th>Action</th>
                                     </tr>
                                   </thead>
@@ -55,7 +55,7 @@
                                       <td class="text-bold-500">{{$row->pelanggan->nama_pelanggan}}</td>
                                       <td>{{$row->produk->nama_produk}}</td>
                                       <td>{{$row->jenis_payment}}</td>
-                                      <td>{{$row->saldo_akhir}}</td>
+                                      <td class="text-end">{{number_format($row->saldo_deposit)}}</td>
                                       <td>
                                         <a href="{{route('transaksi.edit',$row->id_transaksi)}}" class="text-warning m-2" title="Edit">Edit</a> |
                                         <a href="#" class="text-danger m-2 delete_act" data-id="{{$row->id_transaksi}}" title="Delete">Hapus</a>

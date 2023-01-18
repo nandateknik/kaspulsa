@@ -42,24 +42,10 @@
                                 <input name="_method" type="hidden" value="{{$action_method}}">
                                 <input type="hidden" name="id_bank" value="{{old('id_bank', isset($bank) ? $bank->id_bank : '')}}">
                                 <div class="form-group">
-                                    <label for="nama_bank">Nama Pelanggan</label>
-                                    <select required name="pelanggan_id" id="pelanggan_id" value="{{old('pelanggan_id', isset($bank) ? $bank->pelanggan_id : '')}}" class="form-control">
-                                        <option value="">--Silahkan Pilih--</option>
-                                        @if($pelanggan)
-                                            @foreach($pelanggan as $pel)
-                                                <option {{$pel->id_pelanggan == (old('pelanggan_id', isset($bank) ? $bank->pelanggan_id : '')) ? 'selected' : '' }} value="{{$pel->id_pelanggan}}">{{$pel->nama_pelanggan}}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                                <div class="form-group">
                                     <label for="nama_bank">Nama Bank</label>
                                     <select required name="nama_bank" id="nama_bank" value="{{old('nama_bank', isset($bank) ? $bank->nama_bank : '')}}" class="form-control">
                                         <option value="">--Silahkan Pilih--</option>
-                                        <option {{'mandiri' == (old('nama_bank', isset($bank) ? $bank->nama_bank : '')) ? 'selected' : '' }} value="mandiri">Bank Mandiri</option>
-                                        <option {{'bni' == (old('nama_bank', isset($bank) ? $bank->nama_bank : '')) ? 'selected' : '' }} value="bni">Bank BNI</option>
-                                        <option {{'bca' == (old('nama_bank', isset($bank) ? $bank->nama_bank : '')) ? 'selected' : '' }} value="bca">Bank BCA</option>
-                                        <option {{'bri' == (old('nama_bank', isset($bank) ? $bank->nama_bank : '')) ? 'selected' : '' }} value="bri">Bank BRI</option>
+                                        
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -87,4 +73,22 @@
     <!-- // Basic multiple Column Form section end -->
 </div>
 
+@endsection
+
+@section('script')
+<script>
+    
+        // setTimeout(() => {
+        //     $("#nama_bank").select2();
+        // }, 800);
+    $(document).ready(function(){
+        $.getJSON("/storage/list-bank.json", function(result){
+            $.each(result, function(i, field){
+                var o = new Option(field.name, field.name);
+                $(o).html(field.name);
+                $("#nama_bank").append(o);
+            });
+        });
+    })
+</script>
 @endsection

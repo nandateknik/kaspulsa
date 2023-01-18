@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pelanggan;
+use App\Models\Produk;
+use App\Models\Bank;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Log;
 
-class PelangganController extends Controller
+class ProdukController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +19,8 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        $pelanggan = Pelanggan::paginate(20);
-        return view('pelanggan/data',compact('pelanggan'));
+        $produk = Produk::paginate(20);
+        return view('produk/data',compact('produk'));
     }
 
     /**
@@ -27,9 +30,9 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        $action = '/pelanggan';
+        $action = '/produk';
         $action_method = 'POST';
-        return view('pelanggan/input',compact('action','action_method'));
+        return view('produk/input',compact('action','action_method'));
     }
 
     /**
@@ -40,21 +43,24 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'kode_produk' => 'required|unique:produk',
+            'nama_produk' => 'required',
+        ]);
+
         DB::beginTransaction();
         try {
-            $pelanggan = new Pelanggan;
-            $pelanggan->nama_pelanggan = $request->nama_pelanggan;
-            $pelanggan->no_telp = $request->no_telp;
-            $pelanggan->status = $request->status;
-            $pelanggan->save();
-            
+            $produk = new Produk;
+            $produk->nama_produk = $request->nama_produk;
+            $produk->kode_produk = $request->kode_produk;
+            $produk->save();
             DB::commit();
             // all good
-            return redirect ('/pelanggan')->with('success', 'Pelanggan berhasil ditambahkan.');
+            return redirect ('/produk')->with('success', 'Produk berhasil ditambahkan.');
         } catch (\Exception $e) {
             DB::rollback();
             // something went wrong
-            Log::debug('pelanggan store rollback '.$e->getMessage());
+            Log::debug('produk store rollback '.$e->getMessage());
             return redirect()->back()->withInput()->withErrors(['Terjadi kesalahan saat simpan, silahkan coba kembali.']);
         }
     }
@@ -78,13 +84,13 @@ class PelangganController extends Controller
      */
     public function edit($id)
     {
-        $pelanggan = Pelanggan::find($id);
-        if($pelanggan){
-            $action = '/pelanggan/'.$pelanggan->id_pelanggan;
+        $produk = Produk::find($id);
+        if($produk){
+            $action = '/produk/'.$produk->id_produk;
             $action_method = 'PUT';
-            return view('pelanggan/input',compact('pelanggan','action','action_method'));
+            return view('produk/input',compact('produk','action','action_method'));
         }else{
-            return redirect()->back()->withErrors(['Pelanggan tidak ditemukan.']);
+            return redirect()->back()->withErrors(['Produk tidak ditemukan.']);
         }
     }
 
@@ -97,22 +103,26 @@ class PelangganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $pelanggan = Pelanggan::find($id);
-        if($pelanggan){ 
+        
+        $validated = $request->validate([
+            'kode_produk' => ['required',Rule::unique('produk', 'kode_produk')->ignore($id,'id_produk')],
+            'nama_produk' => 'required',
+        ]);
+
+        $produk = Produk::find($id);
+        if($produk){ 
             DB::beginTransaction();
             try {
-                $pelanggan->nama_pelanggan = $request->nama_pelanggan;
-                $pelanggan->no_telp = $request->no_telp;
-                $pelanggan->status = $request->status;
-                $pelanggan->save();
-                
+                $produk->nama_produk = $request->nama_produk;
+                $produk->kode_produk = $request->kode_produk;
+                $produk->save();
                 DB::commit();
                 // all good
-                return redirect ('/pelanggan')->with('success', 'Pelanggan berhasil diupdate.');
+                return redirect ('/produk')->with('success', 'Produk berhasil diupdate.');
             } catch (\Exception $e) {
                 DB::rollback();
                 // something went wrong
-                Log::debug('pelanggan update rollback '.$e->getMessage());
+                Log::debug('produk update rollback '.$e->getMessage());
                 return redirect()->back()->withInput()->withErrors(['Terjadi kesalahan saat simpan, silahkan coba kembali.']);
             }
         }else{
@@ -128,27 +138,25 @@ class PelangganController extends Controller
      */
     public function destroy($id)
     {
-        $pelanggan = Pelanggan::find($id);
-        if($pelanggan){ 
-            DB::beginTransaction();
+        $produk = Produk::find($id);
+        if($produk){ 
             try {
-                    $trDelete = Transaksi::where('pelanggan_id',$id)->delete();
-                    if(!$trDelete){
-                        Pelanggan::where('id_pelanggan',$id)->delete();
-                        DB::commit();
+                    $transaksi = Transaksi::where('produk_id',$id)->first();
+                    if(!$transaksi){
+                        Produk::where('id_produk',$id)->delete();
+                
                         // all good
-                        return redirect ('/pelanggan')->with('success', 'Pelanggan berhasil dihapus.');
+                        return redirect ('/produk')->with('success', 'Produk berhasil dihapus.');
                     }else{
-                        return redirect()->back()->withErrors(['Pelanggan telah melakukan transaksi, tidak bisa dihapus.']);
+                        return redirect()->back()->withErrors(['Produk dipakai pada transaksi, tidak bisa dihapus.']);
                     }
             } catch (\Exception $e) {
-                DB::rollback();
                 // something went wrong
-                Log::debug('pelanggan delete rollback '.$e->getMessage());
-                return redirect()->back()->withInput()->withErrors(['Terjadi kesalahan saat simpan, silahkan coba kembali.']);
+                Log::debug('produk delete rollback '.$e->getMessage());
+                return redirect()->back()->withErrors(['Terjadi kesalahan saat simpan, silahkan coba kembali.']);
             }
         }else{
-            return redirect()->back()->withInput()->withErrors(['Terjadi kesalahan saat simpan, silahkan coba kembali.']);
+            return redirect()->back()->withErrors(['Terjadi kesalahan saat simpan, silahkan coba kembali.']);
         }
     }
 }

@@ -5,20 +5,21 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Bank</h3>
-
+                <h3>Data Produk</h3>
+                
                 @if(Session::has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                   <strong>Info!</strong> {{ Session::get('success') }}
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @endif
+
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Bank</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data Bank</li>
+                        <li class="breadcrumb-item"><a href="index.html">Produk</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Produk</li>
                     </ol>
                 </nav>
             </div>
@@ -31,7 +32,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Data Bank</h4>
+                        <h4 class="card-title">Data Produk</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -40,25 +41,21 @@
                                 <table class="table table-bordered mb-0">
                                   <thead>
                                     <tr>
-                                      <th>Nama Bank</th>
-                                      <th>No Rekening</th>
-                                      <th>Nama Rekening</th>
-                                      <th>Saldo Akhir</th>
+                                      <th>Kode Produk</th>
+                                      <th>Nama Produk</th>
                                       <th>Action</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     
-                                  @if(sizeof($bank) !== 0)
-                                    @foreach($bank as $key => $row)
+                                  @if(sizeof($produk) !== 0)
+                                    @foreach($produk as $key => $row)
                                     <tr>
-                                      <td class="text-bold-500">{{$row->nama_bank}}</td>
-                                      <td>{{$row->no_rekening}}</td>
-                                      <td>{{$row->nama_rekening}}</td>
-                                      <td>{{$row->saldo_akhir}}</td>
+                                      <td>{{$row->kode_produk}}</td>
+                                      <td >{{$row->nama_produk}}</td>
                                       <td>
-                                        <a href="{{route('bank.edit',$row->id_bank)}}" class="text-warning m-2" title="Edit">Edit</a> |
-                                        <a href="#" class="text-danger m-2 delete_act" data-id="{{$row->id_bank}}" data-nama="{{$row->nama_bank}}" title="Delete">Hapus</a>
+                                        <a href="{{route('produk.edit',$row->id_produk)}}" class="text-warning m-2" title="Edit">Edit</a> |
+                                        <a href="#" class="text-danger m-2 delete_act" data-id="{{$row->id_produk}}" data-nama="{{$row->nama_produk}}" title="Delete">Hapus</a>
                                       </td>
                                     </tr>
                                     @endforeach     
@@ -71,10 +68,10 @@
                                   @endif
                                   </tbody>
                                   <tfoot>
-                                    @if($bank->hasPages())
+                                    @if($produk->hasPages())
                                     <tr>
                                       <td colspan="6" align="center">
-                                      {!! $bank->withQueryString()->links() !!}
+                                      {!! $produk->withQueryString()->links() !!}
                                       </td>
                                     </tr>
                                     @endif
@@ -96,11 +93,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Hapus Bank</h5>
+        <h5 class="modal-title">Hapus Produk</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Apakah anda yakin ingin menghapus bank <span class="fw-bold" id="bank_delete"></span></p>
+        <p>Apakah anda yakin ingin mengahpus produk <span class="fw-bold" id="produk_delete"></span></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -108,7 +105,7 @@
         <form id="form-delete" method="POST" action="">
           @csrf
           <input name="_method" type="hidden" value="DELETE">
-          <input name="id_bank" id="id_bank_delete" type="hidden">
+          <input name="id_produk" id="id_produk_delete" type="hidden">
         </form>
       </div>
     </div>
@@ -121,9 +118,9 @@
 <script>
   $('.delete_act').click(function(e){
     e.preventDefault();
-    $('#modal_delete').find('form').attr('action','/bank/'+$(this).data('id'));
-    $('#modal_delete').find('#bank_delete').html($(this).data('nama'));
-    $('#modal_delete').find('#id_bank_delete').val($(this).data('id'));
+    $('#modal_delete').find('form').attr('action','/produk/'+$(this).data('id'));
+    $('#modal_delete').find('#produk_delete').html($(this).data('nama'));
+    $('#modal_delete').find('#id_produk_delete').val($(this).data('id'));
     $('#modal_delete').modal('show');
   })
 

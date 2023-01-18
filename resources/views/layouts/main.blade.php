@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/select2/css/select2.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
 </head>
@@ -43,17 +44,17 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item {{ Request::segment(1) == 'transaksi' ? 'active' : '' }} has-sub">
+                        <li class="sidebar-item {{ Request::segment(1) == 'produk' ? 'active' : '' }} has-sub">
                             <a href="/#" class='sidebar-link'>
                                 <i class="bi bi-journal-bookmark-fill"></i>
-                                <span>Transaksi</span>
+                                <span>Produk</span>
                             </a>
-                            <ul class="submenu {{ Request::segment(1) == 'transaksi' ? 'active' : '' }}">
-                                <li class="submenu-item {{ Request::segment(1) == 'transaksi' && Request::segment(2) == 'create' ? 'active' : '' }}">
-                                    <a href="/transaksi/create">Input Transaksi</a>
+                            <ul class="submenu {{ Request::segment(1) == 'produk' ? 'active' : '' }}">
+                                <li class="submenu-item {{ Request::segment(1) == 'produk' && Request::segment(2) == 'create' ? 'active' : '' }}">
+                                    <a href="/produk/create">Input Transaksi</a>
                                 </li>
-                                <li class="submenu-item {{ Request::segment(1) == 'transaksi' && Request::segment(2) == null ? 'active' : '' }} ">
-                                    <a href="/transaksi">Data Transaksi</a>
+                                <li class="submenu-item {{ Request::segment(1) == 'produk' && Request::segment(2) == null ? 'active' : '' }} ">
+                                    <a href="/produk">Data Transaksi</a>
                                 </li>
                             </ul>
                         </li>
@@ -84,6 +85,21 @@
                                 </li>
                                 <li class="submenu-item {{ Request::segment(1) == 'pelanggan' && Request::segment(2) == null ? 'active' : '' }}">
                                     <a href="/pelanggan">Data Pelanggan</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item {{ Request::segment(1) == 'transaksi' ? 'active' : '' }} has-sub">
+                            <a href="/#" class='sidebar-link'>
+                                <i class="bi bi-journal-bookmark-fill"></i>
+                                <span>Transaksi</span>
+                            </a>
+                            <ul class="submenu {{ Request::segment(1) == 'transaksi' ? 'active' : '' }}">
+                                <li class="submenu-item {{ Request::segment(1) == 'transaksi' && Request::segment(2) == 'create' ? 'active' : '' }}">
+                                    <a href="/transaksi/create">Input Transaksi</a>
+                                </li>
+                                <li class="submenu-item {{ Request::segment(1) == 'transaksi' && Request::segment(2) == null ? 'active' : '' }} ">
+                                    <a href="/transaksi">Data Transaksi</a>
                                 </li>
                             </ul>
                         </li>
@@ -139,6 +155,7 @@
 
     <script src="/assets/vendors/apexcharts/apexcharts.js"></script>
     <script src="/assets/js/pages/dashboard.js"></script>
+    <script src="/assets/select2/js/select2.min.js"></script>
 
     <script src="/assets/js/main.js"></script>
 

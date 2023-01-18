@@ -11,7 +11,7 @@ class Transaksi extends Model
     
     protected $table    = 'transaksi';
     protected $primaryKey = 'id_transaksi';
-    protected $fillable = ['pelanggan_id','produk_id','jenis_payment','saldo_akhir','waktu'];
+    protected $fillable = ['pelanggan_id','produk_id','jenis_payment','saldo_deposit','saldo_akhir','waktu','bank_id'];
 
     public function pelanggan(){
         return $this->belongsTo(Pelanggan::class,'pelanggan_id');

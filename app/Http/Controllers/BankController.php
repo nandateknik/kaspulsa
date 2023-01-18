@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bank;
-use App\Models\Pelanggan;
 use Illuminate\Support\Facades\DB;
 
 class BankController extends Controller
@@ -16,7 +15,7 @@ class BankController extends Controller
      */
     public function index()
     {
-        $bank = Bank::with('pelanggan')->paginate(20);
+        $bank = Bank::paginate(20);
         return view('bank/data',compact('bank'));
     }
 
@@ -29,8 +28,7 @@ class BankController extends Controller
     {
         $action = '/bank';
         $action_method = 'POST';
-        $pelanggan = Pelanggan::all();
-        return view('bank/input',compact('action','action_method','pelanggan'));
+        return view('bank/input',compact('action','action_method'));
     }
 
     /**
@@ -44,7 +42,6 @@ class BankController extends Controller
         DB::beginTransaction();
         try {
             $bank = new Bank;
-            $bank->pelanggan_id = $request->pelanggan_id;
             $bank->nama_bank = $request->nama_bank;
             $bank->no_rekening = $request->no_rekening;
             $bank->nama_rekening = $request->nama_rekening;
@@ -80,12 +77,11 @@ class BankController extends Controller
      */
     public function edit($id)
     {
-        $bank = Bank::with('pelanggan')->find($id);
+        $bank = Bank::find($id);
         if($bank){
-            $pelanggan = Pelanggan::all();
             $action = '/bank/'.$bank->id_bank;
             $action_method = 'PUT';
-            return view('bank/input',compact('bank','action','action_method','pelanggan'));
+            return view('bank/input',compact('bank','action','action_method'));
         }else{
             return redirect()->back()->withErrors(['Bank tidak ditemukan.']);
         }
@@ -107,7 +103,6 @@ class BankController extends Controller
                 $bank->nama_bank = $request->nama_bank;
                 $bank->nama_rekening = $request->nama_rekening;
                 $bank->no_rekening = $request->no_rekening;
-                $bank->pelanggan_id = $request->pelanggan_id;
                 $bank->saldo_akhir = $request->saldo_akhir;
                 $bank->save();
 
