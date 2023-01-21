@@ -104,6 +104,21 @@
                             </ul>
                         </li>
 
+                        <li class="sidebar-item {{ Request::segment(1) == 'pengeluaran' ? 'active' : '' }} has-sub">
+                            <a href="/#" class='sidebar-link'>
+                                <i class="bi bi-journal-bookmark-fill"></i>
+                                <span>Pengeluaran</span>
+                            </a>
+                            <ul class="submenu {{ Request::segment(1) == 'pengeluaran' ? 'active' : '' }}">
+                                <li class="submenu-item {{ Request::segment(1) == 'pengeluaran' && Request::segment(2) == 'create' ? 'active' : '' }}">
+                                    <a href="/pengeluaran/create">Input Pengeluaran</a>
+                                </li>
+                                <li class="submenu-item {{ Request::segment(1) == 'pengeluaran' && Request::segment(2) == null ? 'active' : '' }} ">
+                                    <a href="/pengeluaran">Data Pengeluaran</a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="sidebar-item  has-sub">
                             <a href="/#" class='sidebar-link'>
                                 <i class="bi bi-cash"></i>
@@ -111,10 +126,19 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="/extra-component-avatar.html">Laporan Transaksi</a>
+                                    <a href="/laporan/transaksi/per-tanggal">Laporan Transaksi Harian / Mingguan</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="/extra-component-avatar.html">Saldo Akhir Bank</a>
+                                    <a href="/laporan/transaksi/per-bulan">Laporan Transaksi Bulanan</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="/laporan/saldo-akhir-bank">Saldo Akhir Bank</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="/laporan/pendapatan">Pendapatan</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="/laporan/histori-kas">Histori Kas</a>
                                 </li>
                             </ul>
                         </li>

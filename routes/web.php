@@ -5,6 +5,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\PengeluaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,5 @@ Route::resource('pelanggan', PelangganController::class);
 Route::resource('bank', BankController::class);
 Route::resource('produk', ProdukController::class);
 Route::resource('transaksi', TransaksiController::class);
+Route::resource('pengeluaran', PengeluaranController::class);
 Route::POST('transaksi/set-kas-awal',[TransaksiController::class,'setKasAwal']);

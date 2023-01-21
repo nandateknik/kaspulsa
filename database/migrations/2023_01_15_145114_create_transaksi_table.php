@@ -28,7 +28,6 @@ class CreateTransaksiTable extends Migration
         Schema::table('transaksi', function($table) {
             $table->foreign('pelanggan_id')->references('id_pelanggan')->on('pelanggan');
             $table->foreign('produk_id')->references('id_produk')->on('produk');
-            $table->foreign('bank_id')->references('id_bank')->on('bank');
         });
     }
 
