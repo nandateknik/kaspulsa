@@ -151,4 +151,29 @@ class PelangganController extends Controller
             return redirect()->back()->withInput()->withErrors(['Terjadi kesalahan saat simpan, silahkan coba kembali.']);
         }
     }
+
+    public function dataAjax(Request $request)
+    {
+        // dd($rquest->all());
+        // if($request->has('q')){
+        //     $search = $request->q;
+        //     $pelanggan =Pelanggan::select("id_pelanggan","nama_pelanggan")
+        //     		->where('nama_pelanggan','LIKE','%nan%')
+        //     		->get();
+        // }
+
+    //     $data[] = array(
+    //         "id"=>$pelanggan->id_pelanggan,
+    //         "text"=>$pelanggan->nama_pelanggan
+    //    );
+
+    //    $data=[
+    //     'id' => '1',
+    //     'text' => '1',
+    //    ];
+    //     return response()->json($data);
+
+    // $pelanggan = Pelanggan::paginate(20);
+    //     return view('ajax/pelanggan',compact('pelanggan'));
+    }
 }

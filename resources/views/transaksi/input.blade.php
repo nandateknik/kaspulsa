@@ -29,7 +29,32 @@
     <!-- // Basic multiple Column Form section start -->
     <section id="multiple-column-form">
         <div class="row match-height">
-            <div class="offset-2 col-8 ">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Cari Pelanggan</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="nama_pelanggan">Nama Pelanggan</label>
+                                <select name="nama_pelanggan" id="nama_pelanggan" class="select-pelanggan form-control">
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="no_telp">No Telphone</label>
+                                <input readonly type="text" name="no_telp" id="no_telp" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <input readonly type="text" name="status" id="status" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 ">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Registrasi Transaksi</h4>
@@ -47,21 +72,6 @@
                                     <input type="date" id="waktu" class="form-control" name="waktu"  value="{{old('waktu', isset($transaksi) ? $transaksi->waktu : date('Y-m-d'))}}">
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="id_pelanggan">Pelanggan</label>
-                                            <select required name="pelanggan_id" id="pelanggan_id" value="{{old('pelanggan_id', isset($transaksi) ? $transaksi->pelanggan_id : '')}}" class="form-control">
-                                                <option value="">--Silahkan Pilih--</option>
-                                                @if($pelanggan)
-                                                    @foreach($pelanggan as $pel)
-                                                        <option {{$pel->id_pelanggan == (old('pelanggan_id', isset($transaksi) ? $transaksi->pelanggan_id : '')) ? 'selected' : '' }} value="{{$pel->id_pelanggan}}">{{$pel->nama_pelanggan}}</option>
-                                                    @endforeach
-                                                @endif
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
                                         <div class="form-group">
                                             <label for="id_transaksi">Produk</label>
                                             <select required name="produk_id" id="produk_id" value="{{old('produk_id', isset($transaksi) ? $transaksi->produk_id : '')}}" class="form-control">
@@ -73,8 +83,6 @@
                                                 @endif
                                             </select>
                                         </div>
-                                    </div>
-                                </div>
                                
                                 <div class="form-group">
                                     <label for="id_produk">Jenis Payment</label>
