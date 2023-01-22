@@ -52,10 +52,10 @@
                             </a>
                             <ul class="submenu {{ Request::segment(1) == 'produk' ? 'active' : '' }}">
                                 <li class="submenu-item {{ Request::segment(1) == 'produk' && Request::segment(2) == 'create' ? 'active' : '' }}">
-                                    <a href="/produk/create">Input Transaksi</a>
+                                    <a href="/produk/create">Input Produk</a>
                                 </li>
                                 <li class="submenu-item {{ Request::segment(1) == 'produk' && Request::segment(2) == null ? 'active' : '' }} ">
-                                    <a href="/produk">Data Transaksi</a>
+                                    <a href="/produk">Data Produk</a>
                                 </li>
                             </ul>
                         </li>
@@ -137,7 +137,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidebar-item  ">
+                        <li hidden class="sidebar-item  ">
                             <a href="/" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>Pengaturan</span>

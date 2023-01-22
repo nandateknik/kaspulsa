@@ -56,7 +56,7 @@
                             <h4>Deposit Per Bulan</h4>
                         </div>
                         <div class="card-body">
-                            <div id="chart-profile-visit"></div>
+                            <div id="chart-deposit"></div>
                         </div>
                     </div>
                 </div>
@@ -66,4 +66,36 @@
         
     </section>
 </div>
+@endsection
+
+@section('script')
+<script>
+    var optionsDeposit = {
+        annotations: {
+            position: 'back'
+        },
+        dataLabels: {
+            enabled:false
+        },
+        chart: {
+            type: 'bar',
+            height: 300
+        },
+        fill: {
+            opacity:1
+        },
+        plotOptions: {
+        },
+        series: [{
+            name: 'Total Deposit',
+            data: [{{implode($deposit_bulanan,',')}}]
+        }],
+        colors: '#435ebe',
+        xaxis: {
+            categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul", "Aug","Sep","Oct","Nov","Dec"],
+        },
+    }
+    var chartDeposit = new ApexCharts(document.querySelector("#chart-deposit"), optionsDeposit);
+    chartDeposit.render();
+</script>
 @endsection

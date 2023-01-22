@@ -88,6 +88,8 @@
                 $(o).html(field.name);
                 $("#nama_bank").append(o);
             });
+            
+            $('#nama_bank').select2();
         });
     })
 </script>
