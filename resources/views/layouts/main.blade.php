@@ -38,7 +38,7 @@
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item">
-                            <a href="/index.html" class='sidebar-link'>
+                            <a href="/home" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -126,19 +126,13 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="/laporan/transaksi/per-tanggal">Laporan Transaksi Harian / Mingguan</a>
+                                    <a href="/report/transaksi/per-tanggal">Laporan Transaksi Per Tanggal</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="/laporan/transaksi/per-bulan">Laporan Transaksi Bulanan</a>
+                                    <a href="/report/transaksi/per-bulan">Laporan Transaksi Bulanan</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="/laporan/saldo-akhir-bank">Saldo Akhir Bank</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="/laporan/pendapatan">Pendapatan</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="/laporan/histori-kas">Histori Kas</a>
+                                    <a href="/report/saldo-akhir">Laporan Saldo Akhir</a>
                                 </li>
                             </ul>
                         </li>
@@ -146,6 +140,12 @@
                             <a href="/" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>Pengaturan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="/logout" class='sidebar-link'>
+                                <i class="bi bi-gear-fill"></i>
+                                <span>Logout</span>
                             </a>
                         </li>
 

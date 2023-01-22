@@ -4,7 +4,7 @@
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
-            <div class="offset-2 col-8 col-md-6 order-md-1 order-last">
+            <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Form Transaksi</h3>
                 @if($errors->any())
                     @foreach($errors->all() as $err)
@@ -76,33 +76,39 @@
                                     </div>
                                 </div>
                                
-                                <div class="form-group">
-                                    <label for="id_produk">Jenis Payment</label>
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="form-check">
-                                            <input class="form-check-input" value="bonus" type="radio" name="jenis_payment" id="jenis_payment1" {{'bonus' == (old('jenis_payment', isset($transaksi) ? $transaksi->jenis_payment : '')) ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="jenis_payment1">
-                                                Bonus
-                                            </label>
-                                            </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="saldo_akhir">Deposit Nominal</label>
+                                            <input required type="number" id="saldo_deposit" class="form-control" name="saldo_deposit"  value="{{old('saldo_deposit', isset($transaksi) ? $transaksi->saldo_deposit : '0')}}">
                                         </div>
-                                        <div class="col-4">        
-                                            <div class="form-check">
-                                            <input class="form-check-input" value="deposit" type="radio" name="jenis_payment" id="jenis_payment2" {{'deposit' == (old('jenis_payment', isset($transaksi) ? $transaksi->jenis_payment : '')) ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="jenis_payment2">
-                                                Deposit
-                                            </label>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="id_produk">Jenis Payment</label>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="form-check">
+                                                    <input class="form-check-input" value="bonus" type="radio" name="jenis_payment" id="jenis_payment1" {{'bonus' == (old('jenis_payment', isset($transaksi) ? $transaksi->jenis_payment : '')) ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="jenis_payment1">
+                                                        Bonus
+                                                    </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">        
+                                                    <div class="form-check">
+                                                    <input class="form-check-input" value="deposit" type="radio" name="jenis_payment" id="jenis_payment2" {{'deposit' == (old('jenis_payment', isset($transaksi) ? $transaksi->jenis_payment : '')) ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="jenis_payment2">
+                                                        Deposit
+                                                    </label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="saldo_akhir">Nilai Deposit</label>
-                                    <input required type="number" id="saldo_deposit" class="form-control" name="saldo_deposit"  value="{{old('saldo_deposit', isset($transaksi) ? $transaksi->saldo_deposit : '')}}">
-                                </div><br>
 
-                                <h6>Bank Account</h6>
+                                <h6 class="mt-4">Deposit dari Bank</h6>
                                 <hr>
                                 <div class="row">
                                     <div class="col-4">
@@ -133,8 +139,9 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group">
-                                    <div class="text-center">
+                                <div class="form-group mt-4">
+                                    <hr>
+                                    <div class="text-end">
                                         <button class="btn-primary btn">Simpan Data</button>
                                     </div>
                                 </div>
@@ -156,9 +163,32 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="form-group">
-            <label for="no_rekening">Kas Awal</label>
-            <input form="form-kas" type="number" id="kas_awal" class="form-control" name="kas_awal"  value="{{old('kas_awal', '')}}">
+        <div class="row">
+            <div hidden class="col-md-12">
+                <div class="form-group">
+                    <label for="no_rekening">Kas Awal</label>
+                    <input form="form-kas" type="number" id="kas_awal" class="form-control" name="kas_awal"  value="{{old('kas_awal', '')}}">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr>
+                <h6>Saldo Awal Bank</h6>
+                @isset($bank)
+                    @foreach($bank as $b)
+                    <div class="d-flex">
+                        <div style="width:50%" class="form-group">
+                            <label class="fw-bold" style="font-size:12px" for="no_rekening">{{$b->nama_bank}}</label>
+                            <p style="font-size:12px;margin-bottom:0">Nama Rekening : {{$b->nama_rekening}}</p>
+                            <p style="font-size:12px;margin-bottom:0">No Rekening : {{$b->no_rekening}}</p>
+                        </div>
+                        <div style="width:50%" class="form-group">
+                            <input form="form-kas" type="number" id="kas_bank_{{$b->id_bank}}" class="form-control" name="kas_bank[]"  value="">
+                            <input form="form-kas" type="hidden" id="id_bank_{{$b->id_bank}}" class="form-control" name="id_bank[]"  value="{{$b->id_bank}}">
+                        </div>
+                    </div>
+                    @endforeach
+                @endisset
+            </div>
         </div>
       </div>
       <div class="modal-footer">

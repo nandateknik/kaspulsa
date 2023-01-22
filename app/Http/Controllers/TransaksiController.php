@@ -21,7 +21,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $transaksi = Transaksi::with('pelanggan')->paginate(20);
+        $transaksi = Transaksi::with('pelanggan')->orderBy('waktu','desc')->paginate(20);
         return view('transaksi/data',compact('transaksi'));
     }
 
@@ -169,19 +169,19 @@ class TransaksiController extends Controller
     }
 
     public function setKasAwal(Request $request){
-        $validator = Validator::make($request->all(), [
-            'kas_awal' => 'required|numeric'
-        ]);
-        if ($validator->fails()) {
-            $data['status'] = 'failed';
-            $data['message'] = $validator->errors()->first();
-            return response()->json([$data],400);
+        
+        $bankId = $request->id_bank;
+        $bankKas = $request->kas_bank;
+        if($bankId != null){
+            foreach($bankId as $key => $b){
+                Kas::insert([
+                    'kas_awal' => $bankKas[$key],
+                    'bank_id' => $b,
+                    'tanggal' => date('Y-m-d'),
+                    'jenis' => 'bank',
+                ]);
+            }
         }
-
-        $kas = new Kas;
-        $kas->kas_awal = $request->kas_awal;
-        $kas->tanggal = date('Y-m-d');
-        $kas->save();
 
         $data['status'] = 'success';
         $data['message'] = 'success';

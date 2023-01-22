@@ -43,7 +43,7 @@
                                       <th>Nama Bank</th>
                                       <th>No Rekening</th>
                                       <th>Nama Rekening</th>
-                                      <th>Saldo Akhir</th>
+                                      <th hidden>Saldo Akhir</th>
                                       <th>Action</th>
                                     </tr>
                                   </thead>
@@ -55,7 +55,7 @@
                                       <td class="text-bold-500">{{$row->nama_bank}}</td>
                                       <td>{{$row->no_rekening}}</td>
                                       <td>{{$row->nama_rekening}}</td>
-                                      <td>{{$row->saldo_akhir}}</td>
+                                      <td hidden>{{$row->saldo_akhir}}</td>
                                       <td>
                                         <a href="{{route('bank.edit',$row->id_bank)}}" class="text-warning m-2" title="Edit">Edit</a> |
                                         <a href="#" class="text-danger m-2 delete_act" data-id="{{$row->id_bank}}" data-nama="{{$row->nama_bank}}" title="Delete">Hapus</a>

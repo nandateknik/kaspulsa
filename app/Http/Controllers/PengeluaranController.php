@@ -18,7 +18,7 @@ class PengeluaranController extends Controller
      */
     public function index()
     {
-        $pengeluaran = Pengeluaran::paginate(20);
+        $pengeluaran = Pengeluaran::orderBy('waktu','desc')->paginate(20);
         return view('pengeluaran/data',compact('pengeluaran'));
     }
 
