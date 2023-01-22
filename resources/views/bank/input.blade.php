@@ -56,7 +56,7 @@
                                     <label for="nama_bank">No Rekening</label>
                                     <input type="text" id="no_rekening" class="form-control" name="no_rekening" value="{{old('no_rekening', isset($bank) ? $bank->no_rekening : '')}}">
                                 </div>
-                                <div class="form-group">
+                                <div hidden class="form-group">
                                     <label for="saldo_akhir">Saldo Akhir</label>
                                     <input type="text" id="saldo_akhir" class="form-control" name="saldo_akhir" value="{{old('saldo_akhir', isset($bank) ? $bank->saldo_akhir : '')}}">
                                 </div>
@@ -88,6 +88,8 @@
                 $(o).html(field.name);
                 $("#nama_bank").append(o);
             });
+            
+            $('#nama_bank').select2();
         });
     })
 </script>

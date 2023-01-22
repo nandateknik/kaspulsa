@@ -151,4 +151,40 @@ class PelangganController extends Controller
             return redirect()->back()->withInput()->withErrors(['Terjadi kesalahan saat simpan, silahkan coba kembali.']);
         }
     }
+    
+    public function dataAjax(Request $request)
+    {
+        $data = [];
+        if(NULL != ($request->get('q'))){
+            $search = $request->get('q');
+            $data = Pelanggan::select('no_telp', 'status')->selectRaw("id_pelanggan as id")
+            ->selectRaw("nama_pelanggan as text")
+            ->where('nama_pelanggan','LIKE','%'.$search.'%')
+            ->get()->toArray();
+        }else{
+            $data = Pelanggan::select('no_telp', 'status')->selectRaw("id_pelanggan as id")
+            ->selectRaw("nama_pelanggan as text")
+            ->get()->toArray();
+        }
+        return response()->json(['results' => $data]);
+    }
+    
+    public function getPelanggan(Request $request)
+    {
+        $data = [];
+        if(NULL != ($request->get('id'))){
+            $search = $request->get('id');
+            $data = Pelanggan::find($search);
+        }else{
+            $data = [];
+        }
+        return response()->json(['results' => $data]);
+    }
+
+    public function lookup(Request $request,$id)
+    {
+        $data = Pelanggan::find($id);
+        return response()->json($data);
+    }
+
 }

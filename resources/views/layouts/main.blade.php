@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
 
     <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
     <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
@@ -38,7 +39,7 @@
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item">
-                            <a href="/index.html" class='sidebar-link'>
+                            <a href="/home" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -51,10 +52,10 @@
                             </a>
                             <ul class="submenu {{ Request::segment(1) == 'produk' ? 'active' : '' }}">
                                 <li class="submenu-item {{ Request::segment(1) == 'produk' && Request::segment(2) == 'create' ? 'active' : '' }}">
-                                    <a href="/produk/create">Input Transaksi</a>
+                                    <a href="/produk/create">Input Produk</a>
                                 </li>
                                 <li class="submenu-item {{ Request::segment(1) == 'produk' && Request::segment(2) == null ? 'active' : '' }} ">
-                                    <a href="/produk">Data Transaksi</a>
+                                    <a href="/produk">Data Produk</a>
                                 </li>
                             </ul>
                         </li>
@@ -104,6 +105,21 @@
                             </ul>
                         </li>
 
+                        <li class="sidebar-item {{ Request::segment(1) == 'pengeluaran' ? 'active' : '' }} has-sub">
+                            <a href="/#" class='sidebar-link'>
+                                <i class="bi bi-journal-bookmark-fill"></i>
+                                <span>Pengeluaran</span>
+                            </a>
+                            <ul class="submenu {{ Request::segment(1) == 'pengeluaran' ? 'active' : '' }}">
+                                <li class="submenu-item {{ Request::segment(1) == 'pengeluaran' && Request::segment(2) == 'create' ? 'active' : '' }}">
+                                    <a href="/pengeluaran/create">Input Pengeluaran</a>
+                                </li>
+                                <li class="submenu-item {{ Request::segment(1) == 'pengeluaran' && Request::segment(2) == null ? 'active' : '' }} ">
+                                    <a href="/pengeluaran">Data Pengeluaran</a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="sidebar-item  has-sub">
                             <a href="/#" class='sidebar-link'>
                                 <i class="bi bi-cash"></i>
@@ -111,17 +127,26 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="/extra-component-avatar.html">Laporan Transaksi</a>
+                                    <a href="/report/transaksi/per-tanggal">Laporan Transaksi Per Tanggal</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="/extra-component-avatar.html">Saldo Akhir Bank</a>
+                                    <a href="/report/transaksi/per-bulan">Laporan Transaksi Bulanan</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href="/report/saldo-akhir">Laporan Saldo Akhir</a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidebar-item  ">
+                        <li hidden class="sidebar-item  ">
                             <a href="/" class='sidebar-link'>
                                 <i class="bi bi-gear-fill"></i>
                                 <span>Pengaturan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="/logout" class='sidebar-link'>
+                                <i class="bi bi-gear-fill"></i>
+                                <span>Logout</span>
                             </a>
                         </li>
 
@@ -159,7 +184,6 @@
 
     <script src="/assets/js/main.js"></script>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     @yield('script')
 </body>
 
