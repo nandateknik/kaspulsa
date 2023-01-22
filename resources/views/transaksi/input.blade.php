@@ -29,7 +29,33 @@
     <!-- // Basic multiple Column Form section start -->
     <section id="multiple-column-form">
         <div class="row match-height">
-            <div class="offset-2 col-8 ">
+            
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Cari Pelanggan</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="nama_pelanggan">Nama Pelanggan</label>
+                                <select name="nama_pelanggan" id="nama_pelanggan" class="select-pelanggan form-control">
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="no_telp">No Telphone</label>
+                                <input readonly type="text" name="no_telp" id="no_telp" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <input readonly type="text" name="status" id="status" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 ">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Registrasi Transaksi</h4>
@@ -245,5 +271,50 @@
         }
     });
   })
+  
+  $('.select-pelanggan').select2({
+    minimumInputLength: 2,
+    placeholder: 'Select an item',
+    ajax: {
+        url: '{{url('/transaksi/pelanggan-search')}}',
+        type: "get",
+        dataType: 'json',
+        delay: 250,
+        data: function (term) {
+            return {
+                term: term,
+                q: term['term']
+            };
+        },
+        results: function (data) {
+            return {
+                results: $.map(data, function (item) {
+                    return item;
+                })
+            };
+        }
+    }
+});
+
+$('.select-pelanggan').on("select2:select", function(e) { 
+    id = $(this).find(':selected').val();
+
+    $.ajax({
+        url:'/pelanggan/'+id+'/lookup',
+        type:"get",
+        contentType:false,
+        cache: false,
+        processData:false,
+        success:function(result){
+            $('#no_telp').val(result.no_telp);
+            if(result.status == '1')
+                $('#status').val('Aktif');
+            else
+                $('#status').val('Nonaktif');
+        }
+    });
+
+});
+
 </script>
 @endsection

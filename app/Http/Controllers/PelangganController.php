@@ -151,4 +151,23 @@ class PelangganController extends Controller
             return redirect()->back()->withInput()->withErrors(['Terjadi kesalahan saat simpan, silahkan coba kembali.']);
         }
     }
+    
+    public function getPelanggan(Request $request)
+    {
+        $data = [];
+        if(NULL != ($request->get('id'))){
+            $search = $request->get('id');
+            $data = Pelanggan::find($search);
+        }else{
+            $data = [];
+        }
+        return response()->json(['results' => $data]);
+    }
+
+    public function lookup(Request $request,$id)
+    {
+        $data = Pelanggan::find($id);
+        return response()->json($data);
+    }
+
 }
