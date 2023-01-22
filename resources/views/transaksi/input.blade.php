@@ -73,21 +73,6 @@
                                     <input type="date" id="waktu" class="form-control" name="waktu"  value="{{old('waktu', isset($transaksi) ? $transaksi->waktu : date('Y-m-d'))}}">
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="id_pelanggan">Pelanggan</label>
-                                            <select required name="pelanggan_id" id="pelanggan_id" value="{{old('pelanggan_id', isset($transaksi) ? $transaksi->pelanggan_id : '')}}" class="form-control">
-                                                <option value="">--Silahkan Pilih--</option>
-                                                @if($pelanggan)
-                                                    @foreach($pelanggan as $pel)
-                                                        <option {{$pel->id_pelanggan == (old('pelanggan_id', isset($transaksi) ? $transaksi->pelanggan_id : '')) ? 'selected' : '' }} value="{{$pel->id_pelanggan}}">{{$pel->nama_pelanggan}}</option>
-                                                    @endforeach
-                                                @endif
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
                                         <div class="form-group">
                                             <label for="id_transaksi">Produk</label>
                                             <select required name="produk_id" id="produk_id" value="{{old('produk_id', isset($transaksi) ? $transaksi->produk_id : '')}}" class="form-control">
@@ -99,8 +84,6 @@
                                                 @endif
                                             </select>
                                         </div>
-                                    </div>
-                                </div>
                                
                                 <div class="row">
                                     <div class="col-6">
