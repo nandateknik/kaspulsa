@@ -14,7 +14,36 @@
 
 <body class="bg-primary">
     <div class="d-flex justify-content-center m-3">
-
+<<<<<<< HEAD
+        <form action="" class="bg-white p-5 rounded m-5 col-12 col-md-4">
+            <h4 class="text-center"> Login Aplikasi</h4>
+=======
+        <form action="/login" method="POST" class="bg-white p-5 rounded m-5 col-12 col-md-4">
+            @csrf
+            <h4 class="text-center"> Login Aplikasi</h4>
+            
+            @if($errors->any())
+                    @foreach($errors->all() as $err)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Maaf!</strong> {{ $err }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endforeach
+                @endif
+>>>>>>> 1941b105b89db6bef7e123f95fdb693d6b9e1135
+            <hr>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="username" name="username" id="username" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <div class="text-center mt-5">
+                <button class="btn btn-primary"> Login</button>
+            </div>
+        </form>
     </div>
 </body>
 
