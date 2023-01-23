@@ -11,10 +11,10 @@ class Role extends Model
     use HasFactory;
     
     protected $table    = 'roles';
-    protected $primaryKey = 'id_role';
+    protected $primaryKey = 'id_roles';
     protected $fillable = ['role'];
     
     function user(){
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_role','id_roles');
     }
 }
