@@ -14,6 +14,10 @@
 
 <body class="bg-primary">
     <div class="d-flex justify-content-center m-3">
+<<<<<<< HEAD
+        <form action="" class="bg-white p-5 rounded m-5 col-12 col-md-4">
+            <h4 class="text-center"> Login Aplikasi</h4>
+=======
         <form action="/login" method="POST" class="bg-white p-5 rounded m-5 col-12 col-md-4">
             @csrf
             <h4 class="text-center"> Login Aplikasi</h4>
@@ -26,6 +30,7 @@
                     </div>
                     @endforeach
                 @endif
+>>>>>>> 1941b105b89db6bef7e123f95fdb693d6b9e1135
             <hr>
             <div class="form-group">
                 <label for="username">Username</label>
