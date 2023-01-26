@@ -11,6 +11,6 @@ class Pelanggan extends Model
     
     protected $table    = 'pelanggan';
     protected $primaryKey = 'id_pelanggan';
-    protected $fillable = ['nama_pelanggan','no_telp','status'];
+    protected $fillable = ['nama_pelanggan','no_telp','status','nama_bank','no_rekening'];
 
 }

@@ -45,6 +45,8 @@ class PelangganController extends Controller
             $pelanggan = new Pelanggan;
             $pelanggan->nama_pelanggan = $request->nama_pelanggan;
             $pelanggan->no_telp = $request->no_telp;
+            $pelanggan->nama_bank = $request->nama_bank;
+            $pelanggan->no_rekening = $request->no_rekening;
             $pelanggan->status = $request->status;
             $pelanggan->save();
             
@@ -103,6 +105,8 @@ class PelangganController extends Controller
             try {
                 $pelanggan->nama_pelanggan = $request->nama_pelanggan;
                 $pelanggan->no_telp = $request->no_telp;
+                $pelanggan->nama_bank = $request->nama_bank;
+                $pelanggan->no_rekening = $request->no_rekening;
                 $pelanggan->status = $request->status;
                 $pelanggan->save();
                 

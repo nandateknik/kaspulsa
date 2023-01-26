@@ -43,6 +43,8 @@
                                     <tr>
                                       <th>Nama</th>
                                       <th>No Telphone</th>
+                                      <th>Nama Bank</th>
+                                      <th>No Rekening</th>
                                       <th>Status</th>
                                       <th>Action</th>
                                     </tr>
@@ -54,6 +56,8 @@
                                     <tr>
                                       <td class="text-bold-500">{{$row->nama_pelanggan}}</td>
                                       <td>{{$row->no_telp}}</td>
+                                      <td>{{$row->nama_bank}}</td>
+                                      <td>{{$row->no_rekening}}</td>
                                       <td>{!! $row->status == 1 ? '<span class="badge bg-info">Aktif</span>' : '<span class="badge bg-secondary">Nonaktif</span>' !!}</td>
                                       <td>
                                         <a href="{{route('pelanggan.edit',$row->id_pelanggan)}}" class="text-warning m-2" title="Edit">Edit</a> |

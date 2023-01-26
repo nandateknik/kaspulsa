@@ -40,7 +40,7 @@
                                 @csrf
                                 <input name="_method" type="hidden" value="{{$action_method}}">
                                 <input type="hidden" name="id_pelanggan" value="{{old('id_pelanggan', isset($pelanggan) ? $pelanggan->id_pelanggan : '')}}">
-                                <input type="hidden" name="id_bank" value="{{old('id_pelanggan', isset($pelanggan) ? $pelanggan->banks[0]->id_bank : '')}}">
+                                {{-- <input type="hidden" name="id_bank" value="{{old('id_pelanggan', isset($pelanggan) ? $pelanggan->banks[0]->id_bank : '')}}"> --}}
                                 <div class="form-group">
                                     <label for="nama_pelanggan">Nama Pelanggan</label>
                                     <input required type="text" id="nama_pelanggan" class="form-control" name="nama_pelanggan" value="{{old('nama_pelanggan', isset($pelanggan) ? $pelanggan->nama_pelanggan : '')}}">
@@ -52,7 +52,7 @@
                                 <div class="form-group">
                                     <label for="nama_bank">Nama Bank</label>
                                     <select required name="nama_bank" id="nama_bank" value="{{old('nama_bank', isset($bank) ? $bank->nama_bank : '')}}" class="form-control">
-                                        <option value="">--Silahkan Pilih--</option>
+                                        <option value="{{old('nama_bank', isset($pelanggan) ? $pelanggan->nama_bank : '')}}">{{old('nama_bank', isset($pelanggan) ? $pelanggan->nama_bank : '--Silahkan Pilih--')}}</option>
                                         
                                     </select>
                                 </div>
