@@ -1,11 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-
+ 
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
@@ -25,9 +25,9 @@ class UserSeeder extends Seeder
                 'user_role' => 1,
                 'username' => 'admin',
                 'remember_token' => 0,
-                'created_at' =>Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' =>Carbon::now()->format('Y-m-d H:i:s'),
-                'email_verified_at' =>''
+                'created_at' =>date("Y-m-d H:i:s"),
+                'updated_at' =>date("Y-m-d H:i:s"),
+                'email_verified_at' =>date("Y-m-d H:i:s")
             ]
         );
     }

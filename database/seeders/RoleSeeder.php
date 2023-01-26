@@ -1,12 +1,12 @@
 <?php
 
+namespace Database\Seeders;
+ 
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Models\Role;
-namespace Database\Seeders;
-
-use Illuminate\Database\Seeder;
+ 
 
 class RoleSeeder extends Seeder
 {
@@ -20,10 +20,10 @@ class RoleSeeder extends Seeder
         //
         DB::table('roles')->insert(
             [
-                'role' =>'SUPERADMIN',
-                'created_at' =>Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' =>Carbon::now()->format('Y-m-d H:i:s')
-            ]
+                'role' => 'SUPERADMIN',
+                'created_at' =>date("Y-m-d H:i:s"),
+                'updated_at' =>date("Y-m-d H:i:s")
+                ]
         );
 
     }
