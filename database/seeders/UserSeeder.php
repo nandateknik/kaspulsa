@@ -22,8 +22,12 @@ class UserSeeder extends Seeder
                 'name' => 'Super Admin',
                 'email' => 'superadmin@gmail.com',
                 'password' => bcrypt('admin'),
-                'role' => 1,
-                'username' => 'admin'
+                'user_role' => 1,
+                'username' => 'admin',
+                'remember_token' => 0,
+                'created_at' =>Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' =>Carbon::now()->format('Y-m-d H:i:s'),
+                'email_verified_at' =>''
             ]
         );
     }
