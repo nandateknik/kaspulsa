@@ -65,52 +65,57 @@
                     <div class="card-content">
                         <div class="card-body">
                            <div class="container">
-                            <div class="table-responsive">
-                                <table class="table table-bordered mb-0">
-                                  <thead>
+                            <div class="row">
+                              <div class="col-12">
+
+                              <div class="table-responsive">
+                                  <table class="table table-bordered mb-0">
+                                    <thead>
+                                      <tr>
+                                        <th>Tanggal</th>
+                                        <th class="text-end">Saldo Awal</th>
+                                        <th class="text-end">Deposit Pelanggan</th>
+                                        <th class="text-end">Saldo Akhir</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    @if(sizeof($kasbank) !== 0)
+                                      @foreach($kasbank as $key => $row)
+                                      <tr>
+                                        <td class="text-bold-500">{{Carbon\Carbon::parse($row->tanggal)->format('d M Y')}}</td>
+                                        <td class="text-end">{{number_format($row->kas_awal)}}</td>
+                                        <td class="text-end"><span class="fw-bold">- </span>{{number_format($row->deposit)}}</td>
+                                        <td class="text-end">{{number_format($row->kas_awal-$row->deposit)}}</td>
+                                      </tr>
+                                      @endforeach     
+                                    @else
                                     <tr>
-                                      <th>Tanggal</th>
-                                      <th class="text-end">Saldo Awal</th>
-                                      <th class="text-end">Deposit Pelanggan</th>
-                                      <th class="text-end">Saldo Akhir</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                  @if(sizeof($kasbank) !== 0)
-                                    @foreach($kasbank as $key => $row)
-                                    <tr>
-                                      <td class="text-bold-500">{{Carbon\Carbon::parse($row->tanggal)->format('d M Y')}}</td>
-                                      <td class="text-end">{{number_format($row->kas_awal)}}</td>
-                                      <td class="text-end"><span class="fw-bold">- </span>{{number_format($row->deposit)}}</td>
-                                      <td class="text-end">{{number_format($row->kas_awal-$row->deposit)}}</td>
-                                    </tr>
-                                    @endforeach     
-                                  @else
-                                  <tr>
-                                      <td colspan="6" align="center">
-                                          <h4 class="text-center">No Data Available</h4>
-                                      </td>
-                                  </tr>
-                                  @endif
-                                  </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <td class="fw-bold" align="right">TOTAL</td>
-                                      <td align="right" class="fw-bold">{{number_format($kasbank->sum('kas_awal'))}}</td>
-                                      <td align="right" class="fw-bold"><span>- </span>{{number_format($kasbank->sum('deposit'))}}</td>
-                                      <td align="right" class="fw-bold">{{number_format($kasbank->sum('kas_awal')-$kasbank->sum('deposit'))}}</td>
-                                    </tr>
-                                    @if($kasbank->hasPages())
-                                    <tr>
-                                      <td colspan="6" align="center">
-                                      {!! $kasbank->withQueryString()->links() !!}
-                                      </td>
+                                        <td colspan="6" align="center">
+                                            <h4 class="text-center">No Data Available</h4>
+                                        </td>
                                     </tr>
                                     @endif
-                                  </tfoot>
-                                </table>
+                                    </tbody>
+                                    <tfoot>
+                                      <tr>
+                                        <td class="fw-bold" align="right">TOTAL</td>
+                                        <td align="right" class="fw-bold">{{number_format($kasbank->sum('kas_awal'))}}</td>
+                                        <td align="right" class="fw-bold"><span>- </span>{{number_format($kasbank->sum('deposit'))}}</td>
+                                        <td align="right" class="fw-bold">{{number_format($kasbank->sum('kas_awal')-$kasbank->sum('deposit'))}}</td>
+                                      </tr>
+                                      @if($kasbank->hasPages())
+                                      <tr>
+                                        <td colspan="6" align="center">
+                                        {!! $kasbank->withQueryString()->links() !!}
+                                        </td>
+                                      </tr>
+                                      @endif
+                                    </tfoot>
+                                  </table>
+                                </div>
                               </div>
                             </div>
+                          </div>
                             
                         </div>
                     </div>
@@ -119,6 +124,64 @@
         </div>
     </section>
     <!-- // Basic multiple Column Form section end -->
+
+     <!-- // Basic multiple Column Form section start -->
+     <section id="multiple-column-form">
+      <div class="row match-height">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <h4>Laporan Pengeluaran</h4>
+                  </div>
+                  <div class="card-content">
+                      <div class="card-body">
+                         <div class="container">
+                          <div class="row">
+                            <div class="col-12">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered mb-0">
+                                  <thead>
+                                    <tr>
+                                      <th>Tanggal</th>
+                                      <th class="text-end">Total Pengeluaran</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                  @if(sizeof($pengeluaran) !== 0)
+                                    @foreach($pengeluaran as $key2 => $row2)
+                                    <tr>
+                                      <td class="text-bold-500">{{Carbon\Carbon::parse($row2->waktu)->format('d M Y')}}</td>
+                                      <td class="text-end">{{number_format($row2->total)}}</td>
+                                    </tr>
+                                    @endforeach     
+                                  @else
+                                  <tr>
+                                      <td colspan="2" align="center">
+                                          <h4 class="text-center">No Data Available</h4>
+                                      </td>
+                                  </tr>
+                                  @endif
+                                  </tbody>
+                                  <tfoot>
+                                    <tr>
+                                      <td class="fw-bold" align="right">TOTAL</td>
+                                      <td align="right" class="fw-bold">{{number_format($pengeluaran->sum('total'))}}</td>
+                                    </tr>
+                                  </tfoot>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- // Basic multiple Column Form section end -->
 </div>
 
 @endsection

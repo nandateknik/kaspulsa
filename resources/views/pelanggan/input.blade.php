@@ -50,6 +50,17 @@
                                     <input type="number" id="no_telp" class="form-control" name="no_telp" value="{{old('no_telp', isset($pelanggan) ? $pelanggan->no_telp : '')}}">
                                 </div>
                                 <div class="form-group">
+                                    <label for="nama_bank">Nama Bank</label>
+                                    <select required name="nama_bank" id="nama_bank" value="{{old('nama_bank', isset($bank) ? $bank->nama_bank : '')}}" class="form-control">
+                                        <option value="">--Silahkan Pilih--</option>
+                                        
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="no_telp">No Rekening</label>
+                                    <input type="number" id="no_rekening" class="form-control" name="no_rekening" value="{{old('no_rekening', isset($pelanggan) ? $pelanggan->no_rekening : '')}}">
+                                </div>
+                                <div class="form-group">
                                     <label for="id_bank">Status</label>
                                     <select name="status" id="status" class="form-control">
                                         <option value="">--Silahkan Pilih--</option>
@@ -70,4 +81,23 @@
     <!-- // Basic multiple Column Form section end -->
 </div>
 
+@endsection
+@section('script')
+<script>
+    
+        // setTimeout(() => {
+        //     $("#nama_bank").select2();
+        // }, 800);
+    $(document).ready(function(){
+        $.getJSON("/storage/list-bank.json", function(result){
+            $.each(result, function(i, field){
+                var o = new Option(field.name, field.name);
+                $(o).html(field.name);
+                $("#nama_bank").append(o);
+            });
+            
+            $('#nama_bank').select2();
+        });
+    })
+</script>
 @endsection

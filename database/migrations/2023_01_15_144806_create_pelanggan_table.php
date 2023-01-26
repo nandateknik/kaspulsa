@@ -16,6 +16,8 @@ class CreatePelangganTable extends Migration
         Schema::create('pelanggan', function (Blueprint $table) {
             $table->id('id_pelanggan');
             $table->string('nama_pelanggan',50);
+            $table->string('nama_bank',50);
+            $table->string('no_rekening',50);
             $table->string('no_telp',30);
             $table->integer('status')->length(2);
             $table->timestamps();

@@ -39,7 +39,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="nama_pelanggan">Nama Pelanggan</label>
-                                <select name="nama_pelanggan" id="nama_pelanggan" class="select-pelanggan form-control">
+                                <select name="pelanggan_id" form="transaksi" id="nama_pelanggan" class="select-pelanggan form-control">
                                     
                                 </select>
                             </div>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="POST" action={{$action}}>
+                            <form id="transaksi" class="form" method="POST" action={{$action}}>
                                 @csrf
                                 <input id="kas" type="hidden" value="{{($kas) ? 0 : 1}}">
                                 <input name="_method" type="hidden" value="{{$action_method}}">

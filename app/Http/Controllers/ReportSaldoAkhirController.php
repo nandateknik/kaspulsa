@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Transaksi;
 use App\Models\Bank;
 use App\Models\Kas;
+use App\Models\Pengeluaran;
 use App\Models\Pelanggan;
 use App\Models\Produk;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +39,13 @@ class ReportSaldoAkhirController extends Controller
         ->where('kas.bank_id',$bank)
         ->groupBy(['kas.tanggal','nama_bank','nama_rekening','no_rekening','kas_awal'])->paginate(20);
 
-        return view('report/report_saldoakhir',compact('kasbank','tgl_mulai','tgl_akhir','list_bank','bank','list_bank'));
+        /** Pengeluaran */
+        $pengeluaran = Pengeluaran::select('waktu')
+        ->selectRaw('ifnull(sum(nominal_biaya),0) as total')
+        ->whereBetween('waktu',["$tgl_mulai","$tgl_akhir"])
+        ->groupBy(['waktu'])->get();
+
+        return view('report/report_saldoakhir',compact('pengeluaran','kasbank','tgl_mulai','tgl_akhir','list_bank','bank','list_bank'));
     }
 
 }
