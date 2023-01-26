@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="/assets/select2/css/select2.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body>
@@ -184,6 +186,7 @@
 
     <script src="/assets/js/main.js"></script>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     @yield('script')
 </body>
 
